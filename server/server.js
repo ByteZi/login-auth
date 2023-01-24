@@ -43,7 +43,7 @@ const User = mongoose.model('Users', user)
 
 
 app.post('/post', (req, res) => {
-    // jwt wont work with promise under User.create()
+
     
         User.create(req.body)
         .then(user => {
