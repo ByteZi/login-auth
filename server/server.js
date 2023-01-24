@@ -18,34 +18,50 @@ const user = mongoose.Schema({
     username :{
         type:String,
         required :[true, 'Username required'],
-        minlength : [5, 'Min length of 5']
+        minlength : [5, 'Min length of 5'],
+        unique : [true, 'Username already taken']
     },
 
     password : {
         type : String,
         required : [true, 'Password required'],
         minlength : [5, 'Password length 5']
-    }
+    },
+    todos : [{type : mongoose.Schema.Types.ObjectId, ref: 'Todo'}]
 })
+
+user.pre('save', async function(next){
+
+    if(!this.isModified('password')) return next()
+
+    this.password = await bcrypt.hash(this.password, salt)
+})
+
 
 const User = mongoose.model('Users' , user)
 
 
-app.post('/post', async(req, res) =>{
-
-    const obj = {
-        username : req.body.username,
-        password : await bcrypt.hash(req.body.password, salt) 
-    }
-
-    console.log(obj)
-
-    User.create(obj)
-        .then(obj => res.json(obj))
+app.post('/post', (req, res) =>{
+   
+    User.create(req.body)
+        .then(obj => {
+            res.json(obj)
+            console.log('userCreated')
+        })
         .catch(err => res.status(400).json(err))
+})
 
-    // const test = await bcrypt.hash(req.body.password, salt)
-    // console.log(await bcrypt.compare( req.body.password, test))
+app.post('/login', (req, res) => {
+    User.findOne({username: req.body.username})
+        .then(async(data) => {
+            const comp = await bcrypt.compare(req.body.password, data.password) 
+            if (comp){
+                res.json({cookie:"send cookie"})
+            }else throw 'Something went wrong with the credentials'
+        })
+        .catch(err => res.status(500).json({
+            errors : err
+        }))
 })
 
 
