@@ -15,12 +15,12 @@ import {
 function App() {
 
   return (
-    <>
+    <div id="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={
+          {/* <Route path="/" element={
             <div id="container">
               <h1>Welcome</h1>
 
@@ -28,13 +28,13 @@ function App() {
               <Link to="/signup">signup</Link>
 
             </div>
-          } />
+          } /> */}
 
         </Routes>
       </BrowserRouter>
 
 
-    </>
+    </div>
   );
 }
 

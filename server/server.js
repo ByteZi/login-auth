@@ -28,7 +28,7 @@ const user = mongoose.Schema({
         required: [true, 'Password required'],
         minlength: [5, 'Password length 5']
     },
-    todos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo' }]
+    // todos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo' }]
 })
 
 user.pre('save', async function (next) {
@@ -43,8 +43,6 @@ const User = mongoose.model('Users', user)
 
 
 app.post('/post', (req, res) => {
-
-    
         User.create(req.body)
         .then(user => {
             const token = jwt.sign({user}, 'secret')
@@ -58,7 +56,8 @@ app.post('/login', (req, res) => {
         .then(async (user) => {
             const comp = await bcrypt.compare(req.body.password, user.password)
             if (comp) {
-                const token = jwt.sign({user}, 'secret-key')
+                const token = jwt.sign({id: user.id , username : user.username , password : user.password}, 'secret-key')
+                console.log(token)
                 res.json({userToken : token})
             }
         })

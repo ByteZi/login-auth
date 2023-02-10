@@ -1,51 +1,14 @@
-*{
-  box-sizing: border-box;
+* {
+  margin:0;
   padding:0;
-  margin: 0;
+  box-sizing:border-box;
 }
 
-html {
-  background-color: rgb(43, 83, 156);
-  color:white;
-  text-align:center;
-
-  display:flex;
-  justify-content: center;
+#App {
 
 }
 
-#container{
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-
-  width:30em;
-
-  border:1px solid red;
-
-  height:20em;
-
-  margin-top:10em;
+#root{
+  background-color:blue;
+  height:100vh;
 }
-
-input{
-  padding:10px;
-  border-radius:20px;
-  width:60%;
-  border-style: none;
-}
-
-button, a {
-  width:20%;
-  padding:10px;
-  font-size:15px;
-  border-radius:20px;
-  background-color: rgb(155, 155, 155);
-  color:white;
-
-  cursor:pointer
-}
-
-

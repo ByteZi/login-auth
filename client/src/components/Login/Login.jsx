@@ -21,7 +21,7 @@ const Login = (props) => {
 
         axios.post('http://localhost:3001/login', obj)
             .then((token) => {
-                console.log(token)
+                console.log("Success")
                 history('/')
             })
             .catch(err => {
@@ -36,7 +36,7 @@ const Login = (props) => {
             })
     }
     return (
-        <>
+        <div className="sign-card">
 
             <form onSubmit={onLogin} id="container">
                 <h1>LogIn</h1>
@@ -51,7 +51,7 @@ const Login = (props) => {
                     ))
                     : null
             }
-        </>
+        </div>
     )
 }
 

@@ -49,7 +49,7 @@ const SignUp = (props) => {
     }
 
     return (
-        <>
+        <div className="sign-card">
             <form onSubmit={onSubmit} id="container">
                 <h1>Sign Up</h1>
                 <input placeholder='Username' onChange={(e) => setUsername(e.target.value)} value={username}></input>
@@ -64,7 +64,7 @@ const SignUp = (props) => {
                         ))
                         : <div></div>
                 }
-        </>
+        </div>
     )
 }
 
